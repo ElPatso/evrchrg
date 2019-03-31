@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="evrecharge:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-boot-web-jsp-1.0.war">
+      <element id="artifact" artifact-name="evrecharge:war exploded" />
+    </root>
+  </artifact>
+</component>
