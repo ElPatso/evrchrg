@@ -6,7 +6,7 @@ spring:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/rating_automatization?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/evrecharge?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
@@ -17,5 +17,3 @@ spring:
 server:
   port: 8080
 
-
-welcome.message: Hello Mkyong
