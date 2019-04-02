@@ -1,6 +1,7 @@
 package com.evrecharge.entity;
 
 import com.evrecharge.entity.common.IdComponent;
+import com.evrecharge.entity.enums.RequestStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,4 +22,8 @@ public class Request extends IdComponent<Request> {
     @OneToOne
     @JoinColumn(name = "charge_point_id")
     private ChargePoint point;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private RequestStatusEnum status;
 }

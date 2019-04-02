@@ -1,7 +1,12 @@
 package com.evrecharge.service;
 
-import com.evrecharge.dto.ChargePointInfoDTO;
+import com.evrecharge.dto.RequestDTO;
+import com.evrecharge.entity.Request;
+
+import java.util.List;
 
 public interface RequestService {
-    ChargePointInfoDTO getRentInfo(Long id);
+    List<RequestDTO> getSentRequestsByCurrentUser();
+
+    List<RequestDTO> getReceivedRequestsByCurrentUser();
 }

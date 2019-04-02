@@ -1,7 +1,7 @@
 package com.evrecharge.entity;
 
 import com.evrecharge.entity.common.IdComponent;
-import com.evrecharge.entity.enums.ChargeType;
+import com.evrecharge.entity.enums.ChargeTypeEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,7 +22,7 @@ public class ChargePoint extends IdComponent<ChargePoint> {
     private String address;
     @Column(name = "charge_type")
     @Enumerated(value = EnumType.STRING)
-    private ChargeType chargeType;
+    private ChargeTypeEnum chargeType;
     @Column(name = "access_instructions")
     private String accessInstructions;
     @Column(name = "description")

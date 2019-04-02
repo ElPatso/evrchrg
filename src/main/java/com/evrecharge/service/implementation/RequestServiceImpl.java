@@ -1,37 +1,39 @@
 package com.evrecharge.service.implementation;
 
-import com.evrecharge.dto.ChargePointInfoDTO;
-import com.evrecharge.entity.ChargePoint;
-import com.evrecharge.repository.ChargePointRepository;
+import com.evrecharge.dto.RequestDTO;
+import com.evrecharge.entity.Request;
+import com.evrecharge.entity.User;
 import com.evrecharge.repository.RequestRepository;
 import com.evrecharge.service.RequestService;
+import com.evrecharge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RequestServiceImpl implements RequestService {
 
-    private ChargePointRepository chargePointRepository;
-    private RequestRepository requestRepository;
+    private final RequestRepository requestRepository;
+    private final UserService userService;
 
     @Autowired
-    public RequestServiceImpl(ChargePointRepository chargePointRepository, RequestRepository requestRepository) {
-        this.chargePointRepository = chargePointRepository;
+    public RequestServiceImpl(RequestRepository requestRepository, UserService userService) {
         this.requestRepository = requestRepository;
+        this.userService = userService;
     }
 
-    @Transactional
     @Override
-    public ChargePointInfoDTO getRentInfo(Long id) {
-        final ChargePoint chargePoint = chargePointRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        ChargePointInfoDTO chargePointInfoDTO = new ChargePointInfoDTO();
-        chargePointInfoDTO.setOwner(chargePoint.getOwner().getFirstname());
-        chargePointInfoDTO.setPostCode(chargePoint.getPostCode());
-        chargePointInfoDTO.setDescription(chargePoint.getDescription());
-        chargePointInfoDTO.setType(chargePoint.getChargeType().getName());
-        chargePointInfoDTO.setId(id);
+    public List<RequestDTO> getSentRequestsByCurrentUser() {
+        User currentUser = null;
+        return requestRepository.findAllByUser(currentUser).stream().map(RequestDTO::toDTO).collect(Collectors.toList());
 
-        return chargePointInfoDTO;
+    }
+
+    @Override
+    public List<RequestDTO> getReceivedRequestsByCurrentUser() {
+        User currentUser = null;
+        return null;
     }
 }

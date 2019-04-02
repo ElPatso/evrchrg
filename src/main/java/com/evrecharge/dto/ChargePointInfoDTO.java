@@ -15,6 +15,7 @@ public class ChargePointInfoDTO {
     private List<String> images;
 
     private String time;
-    private String duration;
+    private Integer duration;
+    private PriceDTO price;
 
 }

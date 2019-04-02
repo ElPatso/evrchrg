@@ -1,14 +1,10 @@
 package com.evrecharge;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Main {
 
     public static void main(String[] args) {
-        int a = 1;
-        int b = 3;
-        a = a + b;
-        b = a - b;
-        a = a - b;
-        System.out.println(a);
-        System.out.println(b);
     }
 }

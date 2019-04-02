@@ -1,12 +1,8 @@
 package com.evrecharge.controller;
 
-import java.util.Map;
-
 import com.evrecharge.dto.ChargePointInfoDTO;
-import com.evrecharge.entity.Request;
-import com.evrecharge.service.RequestService;
+import com.evrecharge.service.ChargePointService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class RequestController {
 
-    private RequestService requestService;
+    private ChargePointService requestService;
 
     @Autowired
-    public RequestController(RequestService requestService) {
+    public RequestController(ChargePointService requestService) {
         this.requestService = requestService;
     }
 
