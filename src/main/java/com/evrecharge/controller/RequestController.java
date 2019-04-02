@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
-public class WelcomeController {
+public class RequestController {
 
     private RequestService requestService;
 
     @Autowired
-    public WelcomeController(RequestService requestService) {
+    public RequestController(RequestService requestService) {
         this.requestService = requestService;
     }
 
