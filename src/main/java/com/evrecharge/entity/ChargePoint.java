@@ -5,6 +5,7 @@ import com.evrecharge.entity.enums.ChargeTypeEnum;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -27,11 +28,15 @@ public class ChargePoint extends IdComponent<ChargePoint> {
     private String accessInstructions;
     @Column(name = "description")
     private String description;
+    @Column(name = "available_from")
+    private LocalDateTime availableFrom;
+    @Column(name = "available_to")
+    private LocalDateTime availableTo;
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
     @OneToMany(mappedBy = "chargePoint")
     private List<Image> imageList;
-    @OneToOne(mappedBy = "point")
-    private Request request;
+    @OneToMany(mappedBy = "point", cascade = CascadeType.ALL)
+    private List<Request> request;
 }

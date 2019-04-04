@@ -26,25 +26,28 @@
                 disabledHours: [0, 1, 2, 3, 4, 5, 6, 20, 21, 22, 23, 24]
             });
         });
+
         function selectChange() {
             var type = $('#type').text();
             var e = document.getElementById("dur");
             var strUser = e.options[e.selectedIndex].value;
 
             $.ajax({
-                url : "/price",
+                url: "/price",
                 data: {
-                    "type" : type,
+                    "type": type,
                     "duration": strUser
                 },
                 type: "GET",
                 contentType: 'application/json',
 
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
-                    $('#price').text(data);
+                    $('#price').text(data.currencySymbol + data.price);
                 },
-                error: function(ts) { alert(ts.responseText) }
+                error: function (ts) {
+                    alert(ts.responseText)
+                }
 
             });
         }
@@ -72,7 +75,7 @@
             </div>
         </nav>
 
-        <div style="width: 50%; padding: 10px">
+        <div class="centered" style="width: 30%">
             <div class="card" style="margin: 5px">
                 <div style="padding: 5px; margin: 5px" class="car-body">${point.owner}</div>
             </div>
@@ -83,7 +86,7 @@
                 <div style="padding: 5px; margin: 5px" class="car-body"><span id="type">${point.type}</span></div>
             </div>
             <div class="card" style="margin: 5px">
-                <div style="padding: 5px; margin: 5px" class="car-body">A Basic Panel</div>
+                <div style="padding: 5px; margin: 5px" class="car-body">${point.availableTime}</div>
             </div>
             <div class="card" style="margin: 5px">
                 <div style="padding: 5px; margin: 5px" class="car-body">${point.description}</div>
@@ -99,32 +102,35 @@
 
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="${img}/logo.jpg" alt="Los Angeles">
+                        <img src="${img}/logo.jpg" alt="">
                     </div>
                     <div class="carousel-item">
-                        <img src="${img}/logo.jpg" alt="Chicago">
+                        <img src="${img}/logo.jpg" alt="">
                     </div>
                     <div class="carousel-item">
-                        <img src="${img}/logo.jpg" alt="New York">
+                        <img src="${img}/logo.jpg" alt="">
                     </div>
                 </div>
             </div>
-            <form:form method="post" action="/request" modelAttribute="point">
-                <div class="col-sm-6">
-                    <form:input path="time"
-                                type="text" class="form-control datetimepicker-input" id="datetimepicker5"
-                           data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+            <form:form method="post" action="/${point.id}" modelAttribute="point">
+                <div>
+                    <div class="col-sm-6">
+                        <form:input path="time"
+                                    type="text" class="form-control datetimepicker-input" id="datetimepicker5"
+                                    data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+                    </div>
+                    <form:select onchange="selectChange()"
+                                 id="dur" path="duration" name="source" class="browser-default custom-select">
+                        <option value="3">3 hours</option>
+                        <option value="4">4 hours</option>
+                    </form:select>
+                    <div class="card" style="margin: 5px">
+                        <div style="padding: 5px; margin: 5px" class="car-body"><span id="price"></span></div>
+                    </div>
                 </div>
-                <form:select onchange="selectChange()"
-                        id="dur" path="duration" name="source" class="browser-default custom-select">
-                    <option value="RSS LINK">RSS LINK</option>
-                    <option value="OTHER LINK">OTHER LINK</option>
-                </form:select>
-                <input id="submit" type="submit" value="Submit"/>
+                <input id="submit" type="submit" value="Submit" class="btn btn-primary"/>
             </form:form>
-            <div class="card" style="margin: 5px">
-                <div style="padding: 5px; margin: 5px" class="car-body"><span id="price"></span></div>
-            </div>
+
         </div>
 
     </div>

@@ -2,7 +2,7 @@ spring:
   jpa:
     database: mysql
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
   datasource:
@@ -17,3 +17,6 @@ spring:
 server:
   port: 8080
 
+stripe:
+  public: pk_test_P2ryZyvZrdRTKLREwV3eClqp00rRrpJvpK
+  private: sk_test_auHNgS9Kz3VZZ09R9Ub2ROdQ00Ckve8BDY

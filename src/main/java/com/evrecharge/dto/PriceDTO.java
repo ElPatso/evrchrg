@@ -8,4 +8,9 @@ import java.math.BigDecimal;
 public class PriceDTO {
     private BigDecimal price;
     private String currencySymbol;
+
+    public PriceDTO(BigDecimal price, String currencySymbol) {
+        this.price = price;
+        this.currencySymbol = currencySymbol;
+    }
 }

@@ -5,6 +5,7 @@ import com.evrecharge.entity.enums.RequestStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,11 +20,12 @@ public class Request extends IdComponent<Request> {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "charge_point_id")
     private ChargePoint point;
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private RequestStatusEnum status;
+    @Column(name = "charged")
+    private BigDecimal charged;
 }
