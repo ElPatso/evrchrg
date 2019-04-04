@@ -114,21 +114,21 @@
             </div>
             <form:form method="post" action="/${point.id}" modelAttribute="point">
                 <div>
-                    <div class="col-sm-6">
-                        <form:input path="time"
-                                    type="text" class="form-control datetimepicker-input" id="datetimepicker5"
-                                    data-toggle="datetimepicker" data-target="#datetimepicker5"/>
-                    </div>
-                    <form:select onchange="selectChange()"
-                                 id="dur" path="duration" name="source" class="browser-default custom-select">
+                    <form:select cssStyle="width: 200px" onchange="selectChange()"
+                                 id="dur" path="duration" name="source" class="right browser-default custom-select">
                         <option value="3">3 hours</option>
                         <option value="4">4 hours</option>
                     </form:select>
-                    <div class="card" style="margin: 5px">
+                    <div class="col-sm-6" style="padding-left: 5px">
+                        <form:input cssStyle="width: 200px; margin: 0px" path="time"
+                                    type="text" class="left form-control datetimepicker-input" id="datetimepicker5"
+                                    data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+                    </div>
+                    <div class="card" style="height: 36px; width: 200px; margin: 5px">
                         <div style="padding: 5px; margin: 5px" class="car-body"><span id="price"></span></div>
                     </div>
                 </div>
-                <input id="submit" type="submit" value="Submit" class="btn btn-primary"/>
+                <input id="submit" type="submit" value="Submit" class="btn btn-primary" style="width: 100%;"/>
             </form:form>
 
         </div>
