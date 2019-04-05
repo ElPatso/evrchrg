@@ -22,5 +22,7 @@ public class User extends IdComponent<User> {
     private List<ChargePoint> chargePointList;
     @OneToOne(mappedBy = "user")
     private Request request;
+    @OneToOne
+    private CreditCard creditCard;
 
 }

@@ -1,15 +1,21 @@
 package com.evrecharge.service.implementation;
 
 import com.evrecharge.dto.ChargePointInfoDTO;
+import com.evrecharge.dto.CreditCardDTO;
 import com.evrecharge.dto.PriceDTO;
+import com.evrecharge.dto.RentDTO;
 import com.evrecharge.entity.ChargePoint;
+import com.evrecharge.entity.CreditCard;
 import com.evrecharge.entity.Request;
 import com.evrecharge.entity.enums.ChargeTypeEnum;
 import com.evrecharge.entity.enums.RequestStatusEnum;
 import com.evrecharge.repository.ChargePointRepository;
+import com.evrecharge.repository.CreditCardRepository;
 import com.evrecharge.repository.RequestRepository;
 import com.evrecharge.service.ChargePointService;
+import com.evrecharge.service.StripeService;
 import com.evrecharge.util.DateTimeUtil;
+import com.stripe.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +30,13 @@ import java.util.*;
 public class ChargePointServiceImpl implements ChargePointService {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     private ChargePointRepository chargePointRepository;
-    private RequestRepository requestRepository;
+    private StripeService stripeService;
 
     @Autowired
-    public ChargePointServiceImpl(ChargePointRepository chargePointRepository, RequestRepository requestRepository) {
+    public ChargePointServiceImpl(ChargePointRepository chargePointRepository,
+                                  StripeService requestRepository) {
         this.chargePointRepository = chargePointRepository;
-        this.requestRepository = requestRepository;
+        this.stripeService = requestRepository;
     }
 
     @Transactional
@@ -48,20 +55,25 @@ public class ChargePointServiceImpl implements ChargePointService {
 
     @Override
     @Transactional
-    public void bookChargePoint(ChargePointInfoDTO requestDTO) {
-        final ChargePoint chargePoint = chargePointRepository.findById(requestDTO.getId()).orElseThrow(IllegalAccessError::new);
+    public void bookChargePoint(RentDTO rentDTO) {
+        final ChargePoint chargePoint = chargePointRepository.findById(rentDTO.getId()).orElseThrow(IllegalAccessError::new);
         final Request request = new Request();
-        LocalTime time = LocalTime.parse(requestDTO.getTime());
+        LocalTime time = LocalTime.parse(rentDTO.getTime());
         LocalDateTime from = LocalDateTime.now().withHour(time.getHour()).withMinute(time.getMinute());
-        LocalDateTime to = from.plusHours(requestDTO.getDuration());
+        LocalDateTime to = from.plusHours(rentDTO.getDuration());
         request.setChargeFrom(from);
         request.setChargeTo(to);
         request.setPoint(chargePoint);
-        request.setCharged(calculatePrice(chargePoint.getChargeType().getName(), requestDTO.getDuration()).getPrice());
+        request.setCharged(calculatePrice(chargePoint.getChargeType().getName(), rentDTO.getDuration()).getPrice());
         request.setStatus(RequestStatusEnum.PENDING);
         //request.setUser(currentUser);
         chargePoint.getRequest().add(request);
         chargePointRepository.save(chargePoint);
+        try {
+            stripeService.charge(1000, rentDTO.getToken());
+        } catch (AuthenticationException | InvalidRequestException | APIConnectionException | CardException | APIException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

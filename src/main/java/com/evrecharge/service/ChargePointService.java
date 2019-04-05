@@ -2,12 +2,12 @@ package com.evrecharge.service;
 
 import com.evrecharge.dto.ChargePointInfoDTO;
 import com.evrecharge.dto.PriceDTO;
-import com.evrecharge.entity.Request;
+import com.evrecharge.dto.RentDTO;
 
 public interface ChargePointService {
     ChargePointInfoDTO getRentInfo(Long id);
 
-    void bookChargePoint(ChargePointInfoDTO requestDTO);
+    void bookChargePoint(RentDTO rentDTO);
 
     PriceDTO calculatePrice(String type, Integer duration);
 }
