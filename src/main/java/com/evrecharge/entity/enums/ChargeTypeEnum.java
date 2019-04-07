@@ -6,13 +6,13 @@ public enum ChargeTypeEnum {
     TYPE_1("Type 1") {
         @Override
         public BigDecimal getPrice(BigDecimal hours) {
-            return new BigDecimal(1.5).multiply(hours);
+            return new BigDecimal(2.7).multiply(hours);
         }
     },
     TYPE_2("Type 2") {
         @Override
         public BigDecimal getPrice(BigDecimal hours) {
-            return new BigDecimal(1.9).multiply(hours);
+            return new BigDecimal(3.2).multiply(hours);
         }
     };
 

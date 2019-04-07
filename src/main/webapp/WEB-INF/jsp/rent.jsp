@@ -158,7 +158,7 @@
             <a href="${contextPath}/logout">Logout</a>
         </nav>
 
-        <div class="centered" style="width: 30%">
+        <div class="centered" style="width: 37%">
             <div class="card" style="margin: 5px">
                 <div style="padding: 5px; margin: 5px" class="car-body">
                     <label style="margin: 0px; font-size: 11px">owner</label>

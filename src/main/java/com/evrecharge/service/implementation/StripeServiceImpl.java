@@ -11,7 +11,9 @@ import com.stripe.exception.*;
 import com.stripe.model.Charge;
 import com.stripe.model.Token;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
@@ -38,6 +40,7 @@ public class StripeServiceImpl implements StripeService {
     }
 
     @Override
+    @Transactional
     public void charge(User target, PriceDTO priceDTO, String token) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
 
         Map<String, Object> chargeParams = new HashMap<>();
