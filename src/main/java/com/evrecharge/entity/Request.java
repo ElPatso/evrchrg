@@ -17,7 +17,7 @@ public class Request extends IdComponent<Request> {
     private LocalDateTime chargeFrom;
     @Column(name = "charge_to")
     private LocalDateTime chargeTo;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne

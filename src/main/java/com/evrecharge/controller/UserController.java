@@ -1,9 +1,6 @@
 package com.evrecharge.controller;
 
-import com.evrecharge.service.SecurityService;
-import com.evrecharge.service.StripeService;
-import com.evrecharge.service.UserService;
-import com.stripe.exception.*;
+import com.evrecharge.service.implementation.StripeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    private StripeService stripeService;
+    private StripeServiceImpl stripeServiceImpl;
 
 
-    @GetMapping({"/login", "/"})
+    @GetMapping("/login")
     public String login(Model model) {
         return "login";
     }

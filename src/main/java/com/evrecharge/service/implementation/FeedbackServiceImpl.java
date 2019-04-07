@@ -7,6 +7,7 @@ import com.evrecharge.entity.User;
 import com.evrecharge.repository.ChargePointRepository;
 import com.evrecharge.repository.FeedbackRepository;
 import com.evrecharge.service.FeedbackService;
+import com.evrecharge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +19,20 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
     private final ChargePointRepository chargePointRepository;
+    private final UserService userService;
 
     @Autowired
     public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-                               ChargePointRepository chargePointRepository) {
+                               ChargePointRepository chargePointRepository,
+                               UserService userService) {
         this.feedbackRepository = feedbackRepository;
         this.chargePointRepository = chargePointRepository;
+        this.userService = userService;
     }
 
     @Override
     public void createFeedback(FeedbackDTO feedbackDTO) {
-        User currentUser = null;
+        User currentUser = userService.getCurrentUser();
         ChargePoint chargePoint = chargePointRepository.findById(feedbackDTO.getChargePointId()).orElseThrow(IllegalAccessError::new);
         Feedback feedback = new Feedback();
         feedback.setChargePoint(chargePoint);

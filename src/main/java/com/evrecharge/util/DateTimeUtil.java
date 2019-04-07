@@ -10,4 +10,5 @@ public class DateTimeUtil {
     }
 
     public static DateFormat TIME = new SimpleDateFormat("H:m");
+    public static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
 }

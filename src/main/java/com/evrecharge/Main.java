@@ -1,5 +1,7 @@
 package com.evrecharge;
 
+import com.evrecharge.util.DateTimeUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -10,13 +12,7 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) throws ParseException {
-        for (int i = 0; i < 15; i++){
-            if (i==2){
-                i = 5;
-            }
-            System.out.println(i);
-        }
-
-
+        String text = "04/08/2019 12:55 AM";
+        System.out.println(LocalDateTime.parse(text, DateTimeUtil.DATE_TIME_FORMATTER));
     }
 }

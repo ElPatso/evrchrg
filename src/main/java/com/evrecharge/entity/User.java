@@ -20,9 +20,16 @@ public class User extends IdComponent<User> {
     private String password;
     @OneToMany(mappedBy = "owner")
     private List<ChargePoint> chargePointList;
-    @OneToOne(mappedBy = "user")
-    private Request request;
+    @OneToMany(mappedBy = "user")
+    private List<Request> request;
     @OneToOne
     private CreditCard creditCard;
+    @OneToMany(mappedBy = "paymentFrom")
+    private List<Payment> sent;
+    @OneToMany(mappedBy = "paymentTo")
+    private List<Payment> received;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Car car;
 
 }

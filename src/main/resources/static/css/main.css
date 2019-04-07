@@ -18,8 +18,9 @@
     text-align: center;
 }
 .centered {
-    position: fixed !important;
-    left: 35% !important;
+    position: relative !important;
+    left: 30% !important;
+    color: #007bff;
 }
 
 .button7 {
@@ -61,7 +62,6 @@
 }
 .right {
     float: right;
-    width: 100px;
 }
 .left {
     overflow: hidden;
@@ -650,3 +650,14 @@ h2 {
 
 .starrating > input:hover ~ label
 { color: #1500b5;  } /* Set yellow color when star hover */
+
+.top_row {
+    display: table;
+    width: 100%;
+}
+
+.top_row > div {
+    display: table-cell;
+    width: 50%;
+    border-bottom: 1px solid #eee;
+}
