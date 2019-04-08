@@ -18,10 +18,10 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
         </datasource-mapping>
+        <naming-strategy-map />
       </configuration>
     </facet>
   </component>
@@ -131,5 +131,9 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.stripe:stripe-java:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" name="Maven: me.atlis:nominatim-api:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.8.1" level="project" />
+    <orderEntry type="library" name="Maven: me.atlis:atlis-location-base:1.0.0" level="project" />
   </component>
 </module>

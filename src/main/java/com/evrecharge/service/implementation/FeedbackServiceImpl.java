@@ -12,6 +12,7 @@ import com.evrecharge.service.FeedbackService;
 import com.evrecharge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,21 +21,19 @@ import java.util.stream.Collectors;
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
-    private final ChargePointRepository chargePointRepository;
     private final UserService userService;
     private final RequestRepository requestRepository;
 
     @Autowired
     public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-                               ChargePointRepository chargePointRepository,
                                UserService userService,
                                RequestRepository requestRepository) {
         this.feedbackRepository = feedbackRepository;
-        this.chargePointRepository = chargePointRepository;
         this.userService = userService;
         this.requestRepository = requestRepository;
     }
 
+    @Transactional
     @Override
     public void createFeedback(FeedbackDTO feedbackDTO) {
         User currentUser = userService.getCurrentUser();
@@ -47,6 +46,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedbackRepository.save(feedback);
     }
 
+    @Transactional
     @Override
     public List<FeedbackDTO> getFeedbackListByChargePoint(Long id) {
         return feedbackRepository.getFeedbackListByChargePointId(id)

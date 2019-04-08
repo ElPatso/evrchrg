@@ -1,5 +1,7 @@
 package com.evrecharge;
 
+import com.atlis.location.model.impl.MapPoint;
+import com.atlis.location.nominatim.NominatimAPI;
 import com.evrecharge.util.DateTimeUtil;
 
 import java.text.ParseException;
@@ -12,7 +14,12 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) throws ParseException {
-        String text = "04/08/2019 12:55 AM";
-        System.out.println(LocalDateTime.parse(text, DateTimeUtil.DATE_TIME_FORMATTER));
+        String city = "Lviv";
+        String street = "Luhanska";
+        String build = "20";
+        String endpointUrl = "https://nominatim.openstreetmap.org/";
+        MapPoint mapPoint = NominatimAPI.with(endpointUrl).getMapPointFromAddress(build, street, city, city, "Ukraine", 5);
+        System.out.println(mapPoint.getLatitude());
+        System.out.println(mapPoint.getLongitude());
     }
 }
